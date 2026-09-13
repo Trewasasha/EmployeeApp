@@ -1,0 +1,59 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmployeeApp.View.EmployeeListPage"
+             Title="Сотрудники">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Панель управления -->
+        <StackLayout Grid.Row="0" Padding="10" Orientation="Horizontal" 
+                     BackgroundColor="#F5F5F5">
+            <Label Text="Список сотрудников" FontSize="18" FontAttributes="Bold"
+                   VerticalOptions="Center" HorizontalOptions="StartAndExpand" />
+
+            <Button Text="Добавить" Command="{Binding AddEmployeeCommand}"
+                    BackgroundColor="#4CAF50" TextColor="White"
+                    WidthRequest="100" />
+        </StackLayout>
+
+        <!-- Список -->
+        <RefreshView Grid.Row="1" IsRefreshing="{Binding IsRefreshing}"
+                     Command="{Binding RefreshCommand}">
+            <ListView ItemsSource="{Binding Employees}" 
+                      SelectedItem="{Binding SelectedEmployee}"
+                      HasUnevenRows="True">
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Grid Padding="10,5">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Label Grid.Row="0" 
+                                       Text="{Binding LastName}" 
+                                       FontAttributes="Bold" FontSize="16" />
+
+                                <Label Grid.Row="1" 
+                                       Text="{Binding Company}" 
+                                       TextColor="#555555" FontSize="14" />
+
+                                <Label Grid.Row="2" 
+                                       Text="{Binding BirthDate, StringFormat='{0:dd.MM.yyyy}'}" 
+                                       TextColor="#777777" FontSize="12" />
+                            </Grid>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RefreshView>
+    </Grid>
+</ContentPage>

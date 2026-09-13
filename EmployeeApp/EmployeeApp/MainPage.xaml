@@ -1,0 +1,62 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="EmployeeApp.MainPage"
+             Title="Главная">
+
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style TargetType="Button">
+                <Setter Property="HeightRequest" Value="50" />
+                <Setter Property="CornerRadius" Value="5" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="White" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <!-- Заголовок -->
+        <StackLayout Grid.Row="0" VerticalOptions="Center" Spacing="15" Padding="20">
+            <Label Text="👔 Управление сотрудниками" 
+                   FontSize="28" FontAttributes="Bold"
+                   HorizontalOptions="Center" 
+                   TextColor="#2196F3" />
+
+            <Label Text="Приложение для учета сотрудников компании" 
+                   TextColor="#666666" FontSize="16"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+
+        <!-- Кнопки управления -->
+        <StackLayout Grid.Row="1" Spacing="10" Padding="30">
+            <Button Text="📋 Список сотрудников" 
+                    Command="{Binding GoToEmployeeListCommand}"
+                    BackgroundColor="#4CAF50" />
+
+            <Button Text="➕ Добавить сотрудника" 
+                    Command="{Binding GoToAddEmployeeCommand}"
+                    BackgroundColor="#2196F3" />
+
+            <Button Text="ℹ️ О программе" 
+                    Command="{Binding ShowAboutCommand}"
+                    BackgroundColor="#FF9800" />
+        </StackLayout>
+
+        <!-- Нижний колонтитул -->
+        <StackLayout Grid.Row="2" VerticalOptions="End" Padding="20" Spacing="5">
+            <Label Text="© 2026 EmployeeApp" 
+                   TextColor="#999999" FontSize="12"
+                   HorizontalOptions="Center" />
+            <Label Text="Версия 1.0.0" 
+                   TextColor="#999999" FontSize="11"
+                   HorizontalOptions="Center" />
+        </StackLayout>
+    </Grid>
+</ContentPage>
