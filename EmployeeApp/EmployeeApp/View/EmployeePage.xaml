@@ -4,7 +4,8 @@
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              xmlns:converters="clr-namespace:EmployeeApp.Converters"
              x:Class="EmployeeApp.View.EmployeePage"
-             Title="Редактирование сотрудника">
+             Title="Сотрудник"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -12,110 +13,120 @@
             <converters:BoolToStringConverter x:Key="BoolToStringConverter" />
             <converters:StringToColorConverter x:Key="StringToColorConverter" />
 
-            <Style TargetType="Label">
+            <Style TargetType="Label" x:Key="FieldHeader">
+                <Setter Property="FontSize" Value="13" />
                 <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="VerticalOptions" Value="Center" />
+                <Setter Property="TextColor" Value="{StaticResource PrimaryColor}" />
+                <Setter Property="Margin" Value="0,8,0,2" />
             </Style>
-            <Style TargetType="Entry">
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
-            <Style TargetType="Picker">
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
-            <Style TargetType="DatePicker">
-                <Setter Property="Margin" Value="0,5" />
-            </Style>
+
             <Style TargetType="Label" x:Key="ErrorLabel">
-                <Setter Property="TextColor" Value="#D32F2F" />
-                <Setter Property="FontSize" Value="12" />
-                <Setter Property="Margin" Value="0,-5,0,5" />
+                <Setter Property="TextColor" Value="{StaticResource ErrorColor}" />
+                <Setter Property="FontSize" Value="11" />
+                <Setter Property="Margin" Value="0,2,0,4" />
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
 
     <ScrollView>
-        <StackLayout Padding="10" Spacing="5">
+        <StackLayout Padding="20" Spacing="0">
             <!-- Имя -->
-            <Label Text="Имя*:" FontAttributes="Bold" />
-            <Entry Text="{Binding CurrentEmployee.FirstName, Mode=TwoWay}" 
-                   Placeholder="Введите имя"
-                   BackgroundColor="{Binding FirstNameError, Converter={StaticResource StringToColorConverter}}" />
+            <Label Text="ИМЯ *" Style="{StaticResource FieldHeader}" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Entry Text="{Binding CurrentEmployee.FirstName, Mode=TwoWay}" 
+                       Placeholder="Введите имя" Margin="12,0"
+                       BackgroundColor="{Binding FirstNameError, Converter={StaticResource StringToColorConverter}}" />
+            </Frame>
             <Label Text="{Binding FirstNameError}" Style="{StaticResource ErrorLabel}" 
                    IsVisible="{Binding FirstNameError, Converter={StaticResource StringToBoolConverter}}" />
 
             <!-- Фамилия -->
-            <Label Text="Фамилия*:" FontAttributes="Bold" />
-            <Entry Text="{Binding CurrentEmployee.LastName, Mode=TwoWay}" 
-                   Placeholder="Введите фамилию"
-                   BackgroundColor="{Binding LastNameError, Converter={StaticResource StringToColorConverter}}" />
+            <Label Text="ФАМИЛИЯ *" Style="{StaticResource FieldHeader}" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Entry Text="{Binding CurrentEmployee.LastName, Mode=TwoWay}" 
+                       Placeholder="Введите фамилию" Margin="12,0"
+                       BackgroundColor="{Binding LastNameError, Converter={StaticResource StringToColorConverter}}" />
+            </Frame>
             <Label Text="{Binding LastNameError}" Style="{StaticResource ErrorLabel}" 
                    IsVisible="{Binding LastNameError, Converter={StaticResource StringToBoolConverter}}" />
 
             <!-- Отчество -->
-            <Label Text="Отчество*:" FontAttributes="Bold" />
-            <Entry Text="{Binding CurrentEmployee.MiddleName, Mode=TwoWay}" 
-                   Placeholder="Введите отчество"
-                   BackgroundColor="{Binding MiddleNameError, Converter={StaticResource StringToColorConverter}}" />
+            <Label Text="ОТЧЕСТВО *" Style="{StaticResource FieldHeader}" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Entry Text="{Binding CurrentEmployee.MiddleName, Mode=TwoWay}" 
+                       Placeholder="Введите отчество" Margin="12,0"
+                       BackgroundColor="{Binding MiddleNameError, Converter={StaticResource StringToColorConverter}}" />
+            </Frame>
             <Label Text="{Binding MiddleNameError}" Style="{StaticResource ErrorLabel}" 
                    IsVisible="{Binding MiddleNameError, Converter={StaticResource StringToBoolConverter}}" />
 
             <!-- Дата рождения -->
-            <Label Text="Дата рождения*:" FontAttributes="Bold" />
-            <DatePicker Date="{Binding CurrentEmployee.BirthDate, Mode=TwoWay}" 
-                        MaximumDate="{x:Static sys:DateTime.Now}"
-                        Format="D" 
-                        BackgroundColor="{Binding BirthDateError, Converter={StaticResource StringToColorConverter}}" />
+            <Label Text="ДАТА РОЖДЕНИЯ *" Style="{StaticResource FieldHeader}" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <DatePicker Date="{Binding CurrentEmployee.BirthDate, Mode=TwoWay}" 
+                            MaximumDate="{x:Static sys:DateTime.Now}" Format="D" Margin="12,0"
+                            BackgroundColor="{Binding BirthDateError, Converter={StaticResource StringToColorConverter}}" />
+            </Frame>
             <Label Text="{Binding BirthDateError}" Style="{StaticResource ErrorLabel}" 
                    IsVisible="{Binding BirthDateError, Converter={StaticResource StringToBoolConverter}}" />
 
             <!-- Компания -->
-            <Label Text="Компания:" FontAttributes="Bold" />
-            <Picker ItemsSource="{Binding CompanyNames}" 
-                    SelectedItem="{Binding CurrentEmployee.Company, Mode=TwoWay}"
-                    Title="Выберите компанию" />
+            <Label Text="КОМПАНИЯ" Style="{StaticResource FieldHeader}" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Picker ItemsSource="{Binding CompanyNames}" 
+                        SelectedItem="{Binding CurrentEmployee.Company, Mode=TwoWay}"
+                        Title="Выберите компанию" Margin="12,0" />
+            </Frame>
 
             <!-- Должность -->
-            <Label Text="Должность:" FontAttributes="Bold" />
-            <Picker ItemsSource="{Binding PositionTitles}" 
-                    SelectedItem="{Binding CurrentEmployee.Position, Mode=TwoWay}"
-                    Title="Выберите должность" />
+            <Label Text="ДОЛЖНОСТЬ" Style="{StaticResource FieldHeader}" Margin="0,12,0,2" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Picker ItemsSource="{Binding PositionTitles}" 
+                        SelectedItem="{Binding CurrentEmployee.Position, Mode=TwoWay}"
+                        Title="Выберите должность" Margin="12,0" />
+            </Frame>
 
             <!-- Телефон -->
-            <Label Text="Телефон:" FontAttributes="Bold" />
-            <Entry Text="{Binding CurrentEmployee.PhoneNumber, Mode=TwoWay}" 
-                   Placeholder="+7(XXX)XXX-XX-XX"
-                   Keyboard="Telephone"
-                   BackgroundColor="{Binding PhoneNumberError, Converter={StaticResource StringToColorConverter}}" />
+            <Label Text="ТЕЛЕФОН" Style="{StaticResource FieldHeader}" Margin="0,12,0,2" />
+            <Frame Padding="0" CornerRadius="6" BorderColor="{StaticResource BorderColor}" HasShadow="False">
+                <Entry Text="{Binding CurrentEmployee.PhoneNumber, Mode=TwoWay}" 
+                       Placeholder="+7(XXX)XXX-XX-XX" Keyboard="Telephone" Margin="12,0"
+                       BackgroundColor="{Binding PhoneNumberError, Converter={StaticResource StringToColorConverter}}" />
+            </Frame>
             <Label Text="{Binding PhoneNumberError}" Style="{StaticResource ErrorLabel}" 
                    IsVisible="{Binding PhoneNumberError, Converter={StaticResource StringToBoolConverter}}" />
-            <Label Text="Пример: +7(999)123-45-67" TextColor="#757575" FontSize="11" />
 
-            <!-- Общее сообщение об ошибке -->
-            <Frame BackgroundColor="#FFEBEE" CornerRadius="5" Padding="10"
+            <!-- Сообщение об ошибке -->
+            <Frame BackgroundColor="#FFF0F0" CornerRadius="6" Padding="12" Margin="0,12,0,0" HasShadow="False" BorderColor="#FFCDD2"
                    IsVisible="{Binding ErrorMessage, Converter={StaticResource StringToBoolConverter}}">
-                <Label Text="{Binding ErrorMessage}" TextColor="#D32F2F" />
+                <Label Text="{Binding ErrorMessage}" TextColor="{StaticResource ErrorColor}" FontSize="13" />
             </Frame>
 
             <!-- Кнопки управления -->
-            <StackLayout Orientation="Horizontal" Spacing="5" Margin="0,10">
-                <Button Text="Сохранить" Command="{Binding SaveCommand}" 
-                        BackgroundColor="#4CAF50" TextColor="White" 
-                        HorizontalOptions="FillAndExpand"
+            <StackLayout Spacing="8" Margin="0,24,0,12">
+                <!-- Главная кнопка Сохранить с явным контрастным фоном -->
+                <Button Text="Сохранить" 
+                        Command="{Binding SaveCommand}" 
+                        BackgroundColor="{StaticResource PrimaryColor}"
+                        TextColor="White"
                         IsEnabled="{Binding IsFormValid}" />
 
-                <Button Text="Отмена" Command="{Binding CancelCommand}" 
-                        BackgroundColor="#2196F3" TextColor="White" 
-                        HorizontalOptions="FillAndExpand" />
+                <Button Text="Отмена" 
+                        Command="{Binding CancelCommand}" 
+                        BackgroundColor="#E0E0E0" 
+                        TextColor="{StaticResource PrimaryColor}" />
 
-                <Button Text="Удалить" Command="{Binding DeleteCommand}" 
-                        BackgroundColor="#F44336" TextColor="White" 
-                        HorizontalOptions="FillAndExpand" 
-                        IsEnabled="{Binding IsDeleteEnabled}" />
+                <Button Text="Удалить сотрудника" 
+                        Command="{Binding DeleteCommand}" 
+                        BackgroundColor="Transparent" 
+                        TextColor="{StaticResource ErrorColor}" 
+                        IsEnabled="{Binding IsDeleteEnabled}"
+                        IsVisible="{Binding IsEditMode}" />
             </StackLayout>
 
-            <!-- Индикатор загрузки -->
             <ActivityIndicator IsRunning="{Binding IsBusy}" 
                                IsVisible="{Binding IsBusy}" 
+                               Color="{StaticResource PrimaryColor}"
                                VerticalOptions="Center" />
         </StackLayout>
     </ScrollView>

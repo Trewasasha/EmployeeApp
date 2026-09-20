@@ -14,7 +14,7 @@ namespace EmployeeApp
         {
             GoToEmployeeListCommand = new Command(async () => await GoToEmployeeList());
             GoToAddEmployeeCommand = new Command(async () => await GoToAddEmployee());
-            ShowAboutCommand = new Command(async () => await ShowAbout());
+      
         }
 
         private async System.Threading.Tasks.Task GoToEmployeeList()
@@ -43,15 +43,6 @@ namespace EmployeeApp
             }
         }
 
-        private async System.Threading.Tasks.Task ShowAbout()
-        {
-            await Application.Current.MainPage.DisplayAlert(
-                "О программе",
-                "EmployeeApp\nВерсия 1.0.0\n\n" +
-                "Приложение для управления сотрудниками\n" +
-                "Разработано с использованием Xamarin.Forms\n" +
-                "© 2026 Все права защищены",
-                "OK");
-        }
+        
     }
 }

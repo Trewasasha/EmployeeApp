@@ -2,20 +2,10 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="EmployeeApp.MainPage"
-             Title="Главная">
+             Title="Главная"
+             BackgroundColor="{StaticResource BackgroundColor}">
 
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <Style TargetType="Button">
-                <Setter Property="HeightRequest" Value="50" />
-                <Setter Property="CornerRadius" Value="5" />
-                <Setter Property="FontSize" Value="16" />
-                <Setter Property="TextColor" Value="White" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
-
-    <Grid>
+    <Grid RowSpacing="0">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
@@ -23,40 +13,27 @@
         </Grid.RowDefinitions>
 
         <!-- Заголовок -->
-        <StackLayout Grid.Row="0" VerticalOptions="Center" Spacing="15" Padding="20">
-            <Label Text="👔 Управление сотрудниками" 
-                   FontSize="28" FontAttributes="Bold"
+        <StackLayout Grid.Row="0" VerticalOptions="Center" Spacing="8" Padding="24">
+            <Label Text="Сотрудники" 
+                   FontSize="32" FontAttributes="Bold"
                    HorizontalOptions="Center" 
-                   TextColor="#2196F3" />
+                   TextColor="{StaticResource PrimaryColor}" />
 
-            <Label Text="Приложение для учета сотрудников компании" 
-                   TextColor="#666666" FontSize="16"
+            <Label Text="Управление персоналом компании" 
+                   TextColor="{StaticResource SecondaryColor}" FontSize="15"
                    HorizontalOptions="Center" />
         </StackLayout>
 
         <!-- Кнопки управления -->
-        <StackLayout Grid.Row="1" Spacing="10" Padding="30">
-            <Button Text="📋 Список сотрудников" 
-                    Command="{Binding GoToEmployeeListCommand}"
-                    BackgroundColor="#4CAF50" />
+        <StackLayout Grid.Row="1" Spacing="12" Padding="24,0">
+            <Button Text="Список сотрудников" 
+                    Command="{Binding GoToEmployeeListCommand}" />
 
-            <Button Text="➕ Добавить сотрудника" 
+            <Button Text="Добавить сотрудника" 
                     Command="{Binding GoToAddEmployeeCommand}"
-                    BackgroundColor="#2196F3" />
-
-            <Button Text="ℹ️ О программе" 
-                    Command="{Binding ShowAboutCommand}"
-                    BackgroundColor="#FF9800" />
+                    BackgroundColor="#F0F0F0" TextColor="{StaticResource PrimaryColor}" />
         </StackLayout>
 
-        <!-- Нижний колонтитул -->
-        <StackLayout Grid.Row="2" VerticalOptions="End" Padding="20" Spacing="5">
-            <Label Text="© 2026 EmployeeApp" 
-                   TextColor="#999999" FontSize="12"
-                   HorizontalOptions="Center" />
-            <Label Text="Версия 1.0.0" 
-                   TextColor="#999999" FontSize="11"
-                   HorizontalOptions="Center" />
-        </StackLayout>
+
     </Grid>
 </ContentPage>
